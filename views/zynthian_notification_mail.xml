@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+			<record id="zynthian_notification_mail" model="mail.template">
+			<field name="name">Zynthian Notification Mail</field>
+			<field name="email_from">sales@zynthian.org</field>
+			<field name="subject">${object.subject or (object.record_name and 'Re: %s' % object.record_name) or (object.parent_id and object.parent_id.subject and 'Re: %s' % object.parent_id.subject) or (object.parent_id and object.parent_id.record_name and 'Re: %s' % object.parent_id.record_name)}</field>
+			<field name="email_to">${object.partner_id.id}</field>
+			<field name="email_cc">sales@zynthian.org</field>
+			<field name="lang">${object.partner_id.lang}</field>
+			<field name="model_id" ref="mail.model_mail_message"/>
+			<field name="auto_delete" eval="True"/>
+			<field name="body_html">
+			<![CDATA[
+				<div itemscope="" itemtype="http://schema.org/EmailMessage">
+				    <div itemprop="potentialAction" itemscope="" itemtype="http://schema.org/ViewAction">
+				        <link itemprop="target" href="${ctx['button_access']['url']}">
+				        <link itemprop="url" href="${ctx['button_access']['url']}">
+				        <meta itemprop="name" content="View ${ctx['model_name']}">
+				    </div>
+				</div>
+				<div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777" data-snippet-theme="basic_theme">
+				    <table style="width:600px;background:inherit;color:inherit" cellspacing="0" cellpadding="0">
+				        <tbody><tr>
+				            <td style="padding:10px 10px 10px 5px;font-size: 30px" width="270" valign="center">
+				                <p style="margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><img src="/web/image/6812" class="pull-left" style="vertical-align:middle;border-image-repeat:initial;border-image-outset:initial;border-image-width:initial;border-image-slice:initial;border-image-source:initial;border-left-color:initial;border-bottom-color:initial;border-right-color:initial;border-top-color:initial;border-left-style:initial;border-bottom-style:initial;border-right-style:initial;border-top-style:initial;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;float: left; vertical-align: middle; border: 0px; width: 30%; animation: none;">&nbsp;</p><p style="margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"></p><p style="margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;"><br></p><p style="margin:0px 0px 10px 0px;font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;">
+				                    
+				                </p>
+				            </td>
+				        </tr>
+				    </tbody></table>
+				</div>
+				<div style="padding:0px;width:600px;margin:auto;color:#777777;background-color:#FFFFFF" class="">
+				    <table style="vertical-align:top;font-family:arial;font-size:12px;background:inherit;color:inherit" cellspacing="0" cellpadding="0">
+				        <tbody>
+				            <tr>
+				                <td style="width:600px" valign="top">
+				                    <div>
+				                        <hr style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0;margin:15px auto;padding:0" width="100%">
+				                    </div>
+				                </td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+				<div class="snippet_row bg-color" style="padding:0;width:600px;max-width:600px;margin:0 auto;background: #fff repeat top /100%;color:#777777">
+				    <table style="width:100%;text-align:justify;margin:0 auto;background:inherit;color:inherit;color:inherit">
+				        <tbody><tr>
+				            <td style="padding:10px 30px; font-size:14px">
+				                ${object.body | safe}
+				                % if ctx.get('tracking'):
+				                    % for tracking in ctx['tracking']
+				                        ${tracking[0]} : ${tracking[1]} -&gt; ${tracking[2]}
+				                    % endfor
+				                % endif
+				            </td>
+				        </tr>
+				    </tbody></table>
+				</div>
+				% if ctx.get('signature'):
+				<div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+				    <center>
+				        <table style="margin: 0 auto; width:600px;background:inherit;color:inherit" width="600" cellspacing="0" cellpadding="0" border="0">
+				            <tbody><tr>
+				                <td style="font-size:12px; padding: 5px 30px; text-align: left;">
+				                    &nbsp;
+				                    ${ctx['signature'] | safe}
+				                    &nbsp;
+				                </td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </center>
+				</div>
+				% endif
+			]]>
+			</field>
+		</record>
+	</data>
+</odoo>
