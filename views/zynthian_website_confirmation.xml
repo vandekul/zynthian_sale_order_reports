@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="zynthian_website_confirmation" inherit_id="website_sale.confirmation" name="Zynthian Website Confirmation">
+
+        	<!--Delete instructions (they are down) and move Shipping Address -->
+ 			<xpath expr="//div[@class='oe_website_sale_tx_status']" position="replace"> 
+ 				<h4>Ship To:</h4>
+                <div t-field="order.partner_invoice_id" t-field-options="{                     &quot;widget&quot;: &quot;contact&quot;,                     &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;email&quot;]                     }"/>
+ 			</xpath>
+
+            <!--Delete Taxes field -->
+            <xpath expr="//table[@class='table']" position="replace">
+	            <table class="table">
+	                <thead>
+	                    <tr>
+	                        <th>Products</th>
+	                        <th>Quantity</th>
+	                        <th class="text-right" width="100">Unit Price</th>
+	                        <th class="text-right" width="100"></th>
+	                        <th class="text-right" width="100">Subtotal</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr t-foreach="order.order_line" t-as="line">
+	                        <td>
+	                            <div>
+	                                <a t-attf-href="/shop/product/#{ slug(line.product_id.product_tmpl_id) }">
+	                                    <strong t-esc="line.product_id.with_context(display_default_code=False).display_name"/>
+	                                </a>
+	                            </div>
+	                            <div class="text-muted" t-field="line.name"/>
+	                        </td>
+	                        <td>
+	                            <div id="quote_qty">
+	                                <span t-field="line.product_uom_qty"/>
+	                                <span t-field="line.product_uom"/>
+	                            </div>
+	                        </td>
+	                        <td>
+	                            <strong class="text-right">
+	                                <div t-field="line.price_unit" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;order.pricelist_id.currency_id&quot;}"/>
+	                            </strong>
+	                        </td>
+	                        <td></td>
+	                        <td>
+	                            <div class="text-right" t-field="line.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;order.pricelist_id.currency_id&quot;}"/>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td colspan="3"/>
+	                        <td class="text-right"><strong>Total:</strong></td>
+	                        <td class="text-right">
+	                            <strong t-field="order.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;order.pricelist_id.currency_id&quot;}"/>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+            </xpath>
+
+            <!--Delete address from its original place-->
+            <xpath expr="//div[@class='col-md-3 col-md-offset-1 text-muted']" position="replace">
+            </xpath>
+        </template>
+    </data>
+</openerp>
