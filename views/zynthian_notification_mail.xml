@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-			<record id="zynthian_notification_mail" model="mail.template">
+		<record id="zynthian_notification_mail" model="mail.template">
 			<field name="name">Zynthian Notification Mail</field>
 			<field name="email_from">sales@zynthian.org</field>
 			<field name="subject">${object.subject or (object.record_name and 'Re: %s' % object.record_name) or (object.parent_id and object.parent_id.subject and 'Re: %s' % object.parent_id.subject) or (object.parent_id and object.parent_id.record_name and 'Re: %s' % object.parent_id.record_name)}</field>
