@@ -29,7 +29,7 @@
                         <t t-foreach="doc.order_line" t-as="l">
                             <tr t-if="l.product_uom_qty">
                                 <td>
-                                   <span t-field="l.name"/>
+                                   <span t-field="l.product_id.name"/>
                                 </td>
                                 <td class="text-right">
                                     <span t-field="l.product_uom_qty"/>
