@@ -29,7 +29,7 @@
 	                                    <strong t-esc="line.product_id.with_context(display_default_code=False).display_name"/>
 	                                </a>
 	                            </div>
-	                            <div class="text-muted" t-field="line.name"/>
+	                            <!--<div class="text-muted" t-field="line.name"/>-->
 	                        </td>
 	                        <td>
 	                            <div id="quote_qty">

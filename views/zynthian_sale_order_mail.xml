@@ -6,13 +6,13 @@
 			<field name="email_from">sales@zynthian.org</field>
 			<field name="subject">${object.company_id.name} ${object.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.name or 'n/a' })
 			</field>
-			<field name="email_to">${object.partner_id.id}</field>
+			<field name="email_to">${object.partner_id.email}</field>
 			<field name="email_cc">sales@zynthian.org</field>
 			<field name="lang">${object.partner_id.lang}</field>
 			<field name="report_template" ref="sale.report_sale_order"/>
 			<field name="report_name">${(object.name or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>
 			<field name="model_id" ref="sale.model_sale_order"/>
-			<field name="auto_delete" eval="True"/>
+			<field name="auto_delete" eval="False"/>
 			<field name="body_html">
 			<![CDATA[
 				<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
@@ -35,5 +35,15 @@
 			]]>
 			</field>
 		</record>
+
+		<record id="custom_zynthian_sale_order_mail_action" model="ir.actions.server">
+		       <field name="name">Custom Zynthian Sale Order Mail Action</field>
+		       <field name="model_id" ref="zynthian_sale_order_mail"/>
+		       <field name="condition">True</field>
+		       <field name="type">ir.actions.server</field>
+		       <field name="state">email</field>
+		       <field name="template_id" ref="zynthian_sale_order_mail"/>
+		</record>
+
 	</data>
 </odoo>

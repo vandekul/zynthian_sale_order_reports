@@ -12,6 +12,7 @@
     - zynthian_website_confirmation --> website_sale.confirmation
         -- Only Shipping Address is shown and it's move from its original place
         -- Delete Taxes Field
+        -- Delete product description
     - zynthain_sale_order_mail.xml
         -- New template for sale order
     - zynthian_tracker_sale_order_mail
@@ -30,7 +31,7 @@
         'views/zynthian_sale_order_mail.xml',
         'views/zynthian_tracker_sale_order_mail.xml',
         'views/zynthian_report_layout_header.xml',
-        'views/zynthian_notification_mail.xml',
+        'views/zynthian_notification_mail.xml'
     ],
     'demo': [],
     'installable': True,
