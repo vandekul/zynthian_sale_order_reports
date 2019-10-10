@@ -15,7 +15,7 @@
 								<span t-field="contact.zip"/>
 								<span t-field="contact.city"/><br/>
 								<span t-field="contact.country_id"/>
-								<div style="border-bottom: 1px solid blue;"/>
+								<div style="border-bottom: 1px solid black;"/>
 							</t>
 						</t>
 						<!-- Check doc object, if it is not null it means sale order report is calling-->
