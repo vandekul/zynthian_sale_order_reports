@@ -29,7 +29,8 @@
                         <t t-foreach="doc.order_line" t-as="l">
                             <tr t-if="l.product_uom_qty">
                                 <td>
-                                   <span t-field="l.product_id.name"/>
+                                   <!--<span t-field="l.product_id.name"/>-->
+                                   <span t-field="l.product_id.with_context(display_default_code=False).display_name"/>
                                 </td>
                                 <td class="text-right">
                                     <span t-field="l.product_uom_qty"/>
