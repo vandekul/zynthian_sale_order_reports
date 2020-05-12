@@ -114,6 +114,18 @@
                                             <t t-raw="doc.payment_acquirer_id.error_msg"/>
                                         </div>
                                     </t>
+                                    <t t-foreach="doc.order_line" t-as="l">
+                                        <t t-if="l.product_id.default_code == 'KIT-0038' 
+                                              or l.product_id.default_code == 'KIT-0040'
+                                              or l.product_id.default_code == 'KIT-0041'
+                                              or l.product_id.default_code == 'KIT-0042'
+                                              or l.product_id.default_code == 'KIT-0043'">
+                                        <div class="alert alert-info" role="alert">
+                                            <strong> Delayed delivery! </strong>
+                                            <t>Due to supply chain issues, we have a delivery time of 4-6 weeks for orders containing the ZynScreen v1.4 display.                                </t>
+                                        </div>
+                                        </t>
+                                    </t>
                                 </t>
                             </td>
                         </tr>
