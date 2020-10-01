@@ -9,7 +9,7 @@
                 <div t-field="order.partner_invoice_id" t-field-options="{                     &quot;widget&quot;: &quot;contact&quot;,                     &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;email&quot;]                     }"/>
  			</xpath>
 
-            <!--Delete Taxes field -->
+            <!--Delete Product Description field -->
             <xpath expr="//table[@class='table']" position="replace">
 	            <table class="table">
 	                <thead>
@@ -17,7 +17,7 @@
 	                        <th>Products</th>
 	                        <th>Quantity</th>
 	                        <th class="text-right" width="100">Unit Price</th>
-	                        <th class="text-right" width="100"></th>
+	                        <th class="text-right" width="100">Taxes</th>
 	                        <th class="text-right" width="100">Subtotal</th>
 	                    </tr>
 	                </thead>
@@ -29,7 +29,6 @@
 	                                    <strong t-esc="line.product_id.with_context(display_default_code=False).display_name"/>
 	                                </a>
 	                            </div>
-	                            <!--<div class="text-muted" t-field="line.name"/>-->
 	                        </td>
 	                        <td>
 	                            <div id="quote_qty">
@@ -42,7 +41,9 @@
 	                                <div t-field="line.price_unit" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;order.pricelist_id.currency_id&quot;}"/>
 	                            </strong>
 	                        </td>
-	                        <td></td>
+	                        <td>
+	                        	<div class="text-right" t-field="line.price_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;order.pricelist_id.currency_id&quot;}"/>
+	                        </td>
 	                        <td>
 	                            <div class="text-right" t-field="line.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;order.pricelist_id.currency_id&quot;}"/>
 	                        </td>

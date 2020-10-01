@@ -11,7 +11,7 @@
         -- Included payment method and their instructions
     - zynthian_website_confirmation --> website_sale.confirmation
         -- Only Shipping Address is shown and it's move from its original place
-        -- Delete Taxes Field
+        -- Delete Taxes Field --> Active at 1/10/20
         -- Delete product description
     - zynthain_sale_order_mail.xml
         -- New template for sale order

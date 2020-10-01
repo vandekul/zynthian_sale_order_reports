@@ -22,6 +22,7 @@
                             <th class="text-right">Quantity</th>
                             <th class="text-right">Unit Price</th>
                             <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
+                            <th class="text-right">Taxes</th>
                             <th class="text-right">Price</th>
                         </tr>
                    </thead>
@@ -29,7 +30,7 @@
                         <t t-foreach="doc.order_line" t-as="l">
                             <tr t-if="l.product_uom_qty">
                                 <td>
-                                   <!--<span t-field="l.product_id.name"/>-->
+                                   
                                    <span t-field="l.product_id.with_context(display_default_code=False).display_name"/>
                                 </td>
                                 <td class="text-right">
@@ -43,17 +44,20 @@
                                     <span t-field="l.discount"/>
                                 </td>
                                 <td class="text-right">
+                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>
+                                </td>
+                                <td class="text-right">
                                     <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.pricelist_id.currency_id&quot;}"/>
                                 </td>
                             </tr>
                         </t>
                     </tbody>
                 </table>
-            </xpath>
+            </xpath>-
 
             <!-- Delete taxes fields in total price and included payment method instructions -->
-            <xpath expr="//div[@name='total']" position="replace">
-                <div class="row" name="total">
+            <xpath expr="//div[@name='total']" position="after">
+                <!--<div class="row" name="total">
                     <div class="col-xs-4 pull-right">
                         <table class="table table-condensed">
                             <tr class="border-black">
@@ -64,7 +68,7 @@
                             </tr>
                         </table>
                     </div>
-                </div>
+                </div>-->
                 <table class="table table-condensed mt32 mb32">
                     <thead>
                         <tr>
@@ -114,7 +118,7 @@
                                             <t t-raw="doc.payment_acquirer_id.error_msg"/>
                                         </div>
                                     </t>
-                                    <t t-foreach="doc.order_line" t-as="l">
+                                    <!--<t t-foreach="doc.order_line" t-as="l">
                                         <t t-if="l.product_id.default_code == 'KIT-0038' 
                                               or l.product_id.default_code == 'KIT-0040'
                                               or l.product_id.default_code == 'KIT-0041'
@@ -125,7 +129,7 @@
                                             <t>Due to supply chain issues, we have a delivery time of 4-6 weeks for orders containing the ZynScreen v1.4 display.                                </t>
                                         </div>
                                         </t>
-                                    </t>
+                                    </t>-->
                                 </t>
                             </td>
                         </tr>
