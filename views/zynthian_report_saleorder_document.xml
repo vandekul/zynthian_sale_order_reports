@@ -13,6 +13,20 @@
                 </div>
             </xpath>
 
+            <xpath expr="//div[@id='informations']" position="replace">
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="doc.client_order_ref" class="col-xs-3">
+                        <strong>Your Reference:</strong>
+                        <p t-field="doc.client_order_ref"/>
+                    </div>
+                    <div t-if="doc.date_order" class="col-xs-3">
+                        <strong t-if="doc.state not in ['draft','sent']">Date Ordered:</strong>
+                        <strong t-if="doc.state in ['draft','sent']">Quotation Date:</strong>
+                        <p t-field="doc.date_order"/>
+                    </div>
+                </div>
+            </xpath>
+
             <!-- Delete taxes column -->
             <xpath expr="//table[@class='table table-condensed']" position="replace">
                 <table class="table table-condensed">
